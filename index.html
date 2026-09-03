@@ -1,0 +1,1347 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>YatraTrack | Smart Bus Tracking & Travel Assistance</title>
+
+    <meta name="description"
+        content="YatraTrack helps passengers find buses, view routes, schedules, live locations and estimated arrival times.">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Leaflet Map -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            <span class="logo-icon">Y</span>
+
+            <span>
+                Yatra<span class="logo-highlight">Track</span>
+            </span>
+        </div>
+
+        <nav class="nav-links">
+
+            <a href="#home" class="active">
+                Home
+            </a>
+
+            <a href="#buses">
+                Find a Bus
+            </a>
+
+            <a href="#tracking">
+                Live Tracking
+            </a>
+
+            <a href="#how-it-works">
+                How it works
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+        </nav>
+
+        <div class="nav-actions">
+
+            <button class="language-btn" type="button">
+                EN <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <button
+                class="menu-btn"
+                id="menuBtn"
+                type="button"
+                aria-label="Open menu"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main id="home">
+
+
+        <!-- =================================================
+             HERO SECTION
+        ================================================== -->
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="live-badge">
+
+                    <span class="pulse"></span>
+
+                    LIVE BUS TRACKING
+
+                </div>
+
+
+                <h1>
+                    Your journey.
+                    <span>Tracked.</span>
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Find the right bus, track it in real-time,
+                    check its route and know exactly when
+                    you should board.
+
+                </p>
+
+
+                <!-- SEARCH BOX -->
+
+                <div class="search-box">
+
+                    <!-- FROM -->
+
+                    <div class="location-input">
+
+                        <span class="input-icon">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </span>
+
+                        <div class="input-content">
+
+                            <label for="fromInput">
+                                FROM
+                            </label>
+
+                            <input
+                                type="text"
+                                id="fromInput"
+                                value="Jalandhar"
+                                placeholder="Starting point"
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SWAP -->
+
+                    <button
+                        class="swap-btn"
+                        id="swapBtn"
+                        type="button"
+                        aria-label="Swap locations"
+                    >
+                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                    </button>
+
+
+                    <!-- TO -->
+
+                    <div class="location-input">
+
+                        <span class="input-icon destination">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </span>
+
+                        <div class="input-content">
+
+                            <label for="toInput">
+                                TO
+                            </label>
+
+                            <input
+                                type="text"
+                                id="toInput"
+                                value="Pathankot"
+                                placeholder="Destination"
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SEARCH BUTTON -->
+
+                    <button
+                        class="search-btn"
+                        id="searchBtn"
+                        type="button"
+                    >
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        Find buses
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+
+                <!-- QUICK STATS -->
+
+                <div class="quick-info">
+
+                    <div class="quick-stat">
+
+                        <strong>126+</strong>
+
+                        <span>
+                            Active buses
+                        </span>
+
+                    </div>
+
+
+                    <div class="quick-stat">
+
+                        <strong>287</strong>
+
+                        <span>
+                            Bus stops
+                        </span>
+
+                    </div>
+
+
+                    <div class="quick-stat">
+
+                        <strong>34</strong>
+
+                        <span>
+                            Routes
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 HERO VISUAL
+            ================================================== -->
+
+            <div class="hero-visual">
+
+                <div class="map-glow"></div>
+
+
+                <!-- TOP FLOATING CARD -->
+
+                <div class="floating-card card-top">
+
+                    <span class="mini-bus">
+                        🚌
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            PB-08-5678
+                        </strong>
+
+                        <small>
+                            Arriving in 12 min
+                        </small>
+
+                    </div>
+
+                    <span class="status-dot"></span>
+
+                </div>
+
+
+                <!-- ROUTE VISUAL -->
+
+                <div class="route-visual">
+
+                    <div class="route-line"></div>
+
+
+                    <!-- STOP 1 -->
+
+                    <div class="map-stop stop-1">
+
+                        <span></span>
+
+                        <small>
+                            Jalandhar
+                        </small>
+
+                    </div>
+
+
+                    <!-- STOP 2 -->
+
+                    <div class="map-stop stop-2">
+
+                        <span></span>
+
+                        <small>
+                            Kartarpur
+                        </small>
+
+                    </div>
+
+
+                    <!-- STOP 3 -->
+
+                    <div class="map-stop stop-3">
+
+                        <span></span>
+
+                        <small>
+                            Beas
+                        </small>
+
+                    </div>
+
+
+                    <!-- STOP 4 -->
+
+                    <div class="map-stop stop-4">
+
+                        <span></span>
+
+                        <small>
+                            Mukerian
+                        </small>
+
+                    </div>
+
+
+                    <!-- STOP 5 -->
+
+                    <div class="map-stop stop-5">
+
+                        <span></span>
+
+                        <small>
+                            Pathankot
+                        </small>
+
+                    </div>
+
+
+                    <!-- BUS -->
+
+                    <div class="bus-marker">
+                        🚌
+                    </div>
+
+                </div>
+
+
+                <!-- BOTTOM ETA CARD -->
+
+                <div class="floating-card card-bottom">
+
+                    <div class="eta-circle">
+                        12
+                    </div>
+
+                    <div>
+
+                        <small>
+                            ESTIMATED ARRIVAL
+                        </small>
+
+                        <strong>
+                            10:42 AM
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             BUS SEARCH RESULTS
+        ================================================== -->
+
+        <section
+            class="bus-section"
+            id="buses"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        AVAILABLE NOW
+                    </span>
+
+                    <h2>
+                        Buses for your journey
+                    </h2>
+
+                    <p class="section-description">
+                        Live buses available from
+                        <strong id="fromDisplay">
+                            Jalandhar
+                        </strong>
+                        to
+                        <strong id="toDisplay">
+                            Pathankot
+                        </strong>
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="view-all"
+                    type="button"
+                    id="viewAllBtn"
+                >
+                    View all
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+            </div>
+
+
+            <!-- BUS CARDS -->
+
+            <div
+                class="bus-grid"
+                id="busGrid"
+            >
+
+
+                <!-- =================================================
+                     BUS 1
+                ================================================== -->
+
+                <article class="bus-card">
+
+                    <div class="bus-card-top">
+
+                        <div>
+
+                            <div class="bus-number">
+                                PB-07-1234
+                            </div>
+
+                            <span class="bus-type">
+                                Ordinary Bus
+                            </span>
+
+                        </div>
+
+
+                        <span class="on-route">
+                            <span>●</span>
+                            On route
+                        </span>
+
+                    </div>
+
+
+                    <div class="route-name">
+
+                        Jalandhar
+
+                        <span>
+                            →
+                        </span>
+
+                        Pathankot
+
+                    </div>
+
+
+                    <div class="bus-details">
+
+                        <div>
+
+                            <small>
+                                CURRENT LOCATION
+                            </small>
+
+                            <strong>
+                                Kartarpur
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <small>
+                                ETA
+                            </small>
+
+                            <strong>
+                                18 min
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <small>
+                                DEPARTURE
+                            </small>
+
+                            <strong>
+                                8:30 AM
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BOARDING INFO -->
+
+                    <div class="stop-info">
+
+                        <div>
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            <span>
+                                Boarding: Jalandhar Bus Stand
+                            </span>
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-flag-checkered"></i>
+
+                            <span>
+                                Drop: Pathankot
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="track-button"
+                        type="button"
+                        onclick="trackBus('PB-07-1234')"
+                    >
+
+                        <i class="fa-solid fa-location-crosshairs"></i>
+
+                        Track bus
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     BUS 2 - RECOMMENDED
+                ================================================== -->
+
+                <article class="bus-card featured">
+
+                    <div class="recommended">
+                        RECOMMENDED
+                    </div>
+
+
+                    <div class="bus-card-top">
+
+                        <div>
+
+                            <div class="bus-number">
+                                PB-08-5678
+                            </div>
+
+                            <span class="bus-type">
+                                Express Bus
+                            </span>
+
+                        </div>
+
+
+                        <span class="on-route">
+                            <span>●</span>
+                            On route
+                        </span>
+
+                    </div>
+
+
+                    <div class="route-name">
+
+                        Jalandhar
+
+                        <span>
+                            →
+                        </span>
+
+                        Pathankot
+
+                    </div>
+
+
+                    <div class="bus-details">
+
+                        <div>
+
+                            <small>
+                                CURRENT LOCATION
+                            </small>
+
+                            <strong>
+                                Beas
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <small>
+                                ETA
+                            </small>
+
+                            <strong>
+                                35 min
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <small>
+                                DEPARTURE
+                            </small>
+
+                            <strong>
+                                8:45 AM
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stop-info">
+
+                        <div>
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            <span>
+                                Boarding: Jalandhar Bus Stand
+                            </span>
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-flag-checkered"></i>
+
+                            <span>
+                                Drop: Pathankot
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="track-button"
+                        type="button"
+                        onclick="trackBus('PB-08-5678')"
+                    >
+
+                        <i class="fa-solid fa-location-crosshairs"></i>
+
+                        Track bus
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     BUS 3
+                ================================================== -->
+
+                <article class="bus-card">
+
+                    <div class="bus-card-top">
+
+                        <div>
+
+                            <div class="bus-number">
+                                PB-10-9012
+                            </div>
+
+                            <span class="bus-type">
+                                Ordinary Bus
+                            </span>
+
+                        </div>
+
+
+                        <span class="on-route">
+                            <span>●</span>
+                            On route
+                        </span>
+
+                    </div>
+
+
+                    <div class="route-name">
+
+                        Jalandhar
+
+                        <span>
+                            →
+                        </span>
+
+                        Pathankot
+
+                    </div>
+
+
+                    <div class="bus-details">
+
+                        <div>
+
+                            <small>
+                                CURRENT LOCATION
+                            </small>
+
+                            <strong>
+                                Mukerian
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <small>
+                                ETA
+                            </small>
+
+                            <strong>
+                                52 min
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <small>
+                                DEPARTURE
+                            </small>
+
+                            <strong>
+                                9:15 AM
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stop-info">
+
+                        <div>
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            <span>
+                                Boarding: Jalandhar Bus Stand
+                            </span>
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-flag-checkered"></i>
+
+                            <span>
+                                Drop: Pathankot
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="track-button"
+                        type="button"
+                        onclick="trackBus('PB-10-9012')"
+                    >
+
+                        <i class="fa-solid fa-location-crosshairs"></i>
+
+                        Track bus
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             HOW IT WORKS
+        ================================================== -->
+
+        <section
+            class="how-section"
+            id="how-it-works"
+        >
+
+            <div class="section-heading centered">
+
+                <span class="section-label">
+                    SIMPLE & SMART
+                </span>
+
+                <h2>
+                    How YatraTrack works
+                </h2>
+
+                <p>
+                    Find and track your bus in just a few simple steps.
+                </p>
+
+            </div>
+
+
+            <div class="steps-grid">
+
+
+                <!-- STEP 1 -->
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <div class="step-icon">
+                        <i class="fa-solid fa-magnifying-glass-location"></i>
+                    </div>
+
+                    <h3>
+                        Search your journey
+                    </h3>
+
+                    <p>
+                        Enter your starting point and destination
+                        to find available buses.
+                    </p>
+
+                </div>
+
+
+                <!-- STEP 2 -->
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <div class="step-icon">
+                        <i class="fa-solid fa-bus"></i>
+                    </div>
+
+                    <h3>
+                        Choose your bus
+                    </h3>
+
+                    <p>
+                        Compare buses using their route,
+                        schedule, location and ETA.
+                    </p>
+
+                </div>
+
+
+                <!-- STEP 3 -->
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <div class="step-icon">
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                    </div>
+
+                    <h3>
+                        Track in real-time
+                    </h3>
+
+                    <p>
+                        Follow your selected bus on the map
+                        and know when it will reach you.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             LIVE TRACKING
+        ================================================== -->
+
+        <section
+            class="tracking-section"
+            id="tracking"
+        >
+
+            <div class="tracking-header">
+
+                <div>
+
+                    <span class="section-label">
+                        LIVE TRACKING
+                    </span>
+
+                    <h2>
+                        See your bus in real time
+                    </h2>
+
+                    <p>
+                        Follow the bus along its route and know
+                        exactly when it will reach your boarding point.
+                    </p>
+
+                </div>
+
+
+                <div class="live-status">
+
+                    <span class="pulse"></span>
+
+                    Live
+
+                </div>
+
+            </div>
+
+
+            <!-- TRACKING CONTAINER -->
+
+            <div class="tracking-container">
+
+
+                <!-- MAP -->
+
+                <div
+                    id="map"
+                    aria-label="Live bus tracking map"
+                ></div>
+
+
+                <!-- MAP INFORMATION -->
+
+                <aside class="map-info">
+
+
+                    <!-- SELECTED BUS -->
+
+                    <div class="selected-bus">
+
+                        <div class="selected-bus-icon">
+                            🚌
+                        </div>
+
+                        <div>
+
+                            <small>
+                                SELECTED BUS
+                            </small>
+
+                            <strong id="selectedBus">
+                                PB-08-5678
+                            </strong>
+
+                        </div>
+
+                        <span class="on-route">
+                            ● LIVE
+                        </span>
+
+                    </div>
+
+
+                    <!-- ETA -->
+
+                    <div class="eta-large">
+
+                        <div>
+
+                            <small>
+                                ARRIVING IN
+                            </small>
+
+                            <strong id="eta">
+                                12 min
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <small>
+                                DISTANCE
+                            </small>
+
+                            <strong id="distance">
+                                2.4 km
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- NEXT STOP -->
+
+                    <div class="next-stop">
+
+                        <small>
+                            NEXT STOP
+                        </small>
+
+                        <strong id="nextStop">
+                            Kartarpur
+                        </strong>
+
+
+                        <div class="progress">
+
+                            <div
+                                class="progress-fill"
+                                id="progressFill"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ROUTE DETAILS -->
+
+                    <div class="route-summary">
+
+                        <div class="route-point">
+
+                            <span class="point start"></span>
+
+                            <div>
+
+                                <small>
+                                    BOARDING
+                                </small>
+
+                                <strong>
+                                    Jalandhar
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="route-point">
+
+                            <span class="point end"></span>
+
+                            <div>
+
+                                <small>
+                                    DESTINATION
+                                </small>
+
+                                <strong>
+                                    Pathankot
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TRACKING BUTTON -->
+
+                    <button
+                        class="refresh-location"
+                        id="refreshLocation"
+                        type="button"
+                    >
+
+                        <i class="fa-solid fa-rotate"></i>
+
+                        Refresh location
+
+                    </button>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             TRAVEL ASSISTANCE / FEATURES
+        ================================================== -->
+
+        <section class="features-section">
+
+            <div class="section-heading centered">
+
+                <span class="section-label">
+                    TRAVEL ASSISTANCE
+                </span>
+
+                <h2>
+                    Everything you need for a better journey
+                </h2>
+
+            </div>
+
+
+            <div class="features-grid">
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+
+                    <h3>
+                        Live Location
+                    </h3>
+
+                    <p>
+                        Know where your bus is right now.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-route"></i>
+                    </div>
+
+                    <h3>
+                        Smart Routes
+                    </h3>
+
+                    <p>
+                        View the complete route and important stops.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+
+                    <h3>
+                        Accurate ETA
+                    </h3>
+
+                    <p>
+                        Estimate when your bus will reach you.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+
+                    <h3>
+                        Bus Schedule
+                    </h3>
+
+                    <p>
+                        Check departure and arrival timings easily.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer id="about">
+
+        <div class="footer-top">
+
+            <div class="footer-brand">
+
+                <div class="logo">
+
+                    <span class="logo-icon">
+                        Y
+                    </span>
+
+                    <span>
+                        Yatra<span class="logo-highlight">
+                            Track
+                        </span>
+                    </span>
+
+                </div>
+
+                <p>
+                    Smarter journeys. Better travel.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="#home">
+                    Home
+                </a>
+
+                <a href="#buses">
+                    Find a Bus
+                </a>
+
+                <a href="#tracking">
+                    Live Tracking
+                </a>
+
+                <a href="#how-it-works">
+                    How it works
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 YatraTrack
+            </span>
+
+            <span>
+                Smart Bus Tracking & Travel Assistance
+            </span>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         LEAFLET JS
+    ====================================================== -->
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+
+    <!-- =====================================================
+         MAIN JAVASCRIPT
+    ====================================================== -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
+```

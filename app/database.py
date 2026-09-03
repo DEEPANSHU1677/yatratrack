@@ -1,9 +1,12 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-# SQLite for hackathon/demo purposes.
-# Swap to postgresql://user:pass@host/db for production.
-SQLALCHEMY_DATABASE_URL = "sqlite:///./yatragpt.db"
+# On Vercel, only /tmp is writable. For real production, use Postgres.
+if os.getenv("VERCEL") or os.getenv("YATRAGPT_ENV") == "production":
+    SQLALCHEMY_DATABASE_URL = "sqlite:////tmp/yatragpt.db"
+else:
+    SQLALCHEMY_DATABASE_URL = "sqlite:///./yatragpt.db"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
